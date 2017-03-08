@@ -136,6 +136,12 @@ docker exec -ti a4083c8dbd99 /bin/bash -l
 docker run -i -t --entrypoint /bin/bash ${imageName}
 ```
 
+### Run container with volume mount to current working directory
+
+```
+docker run -t -d -v ${PWD}:/app ${image_name}
+```
+
 ### Run containers and link them
 
 ```
