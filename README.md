@@ -36,6 +36,12 @@ nvm install v4.2.2
 ./node_modules/mocha/bin/mocha test/lib/my-test.js
 ```
 
+### Run single Jasmine test (alternatively install jasmine globally and ensure it is in your path)
+
+```
+./node_modules/jasmine/bin/jasmine.js path/to/my/spec/file.spec.js 
+```
+
 ## Ansible
 
 ### See what hosts will be affected by a playbook
