@@ -78,7 +78,15 @@ SELECT * FROM MY_TABLE WHERE MY_TIMESTAMP_FIELD > TO_DATE('19/03/2015','dd/mm/yy
 %CATALINA_HOME%\bin\shutdown.bat
 ```
 
-## Windows List listening ports
+## List listening ports
+
+### Linux
+
+```
+netstat -plnt
+```
+
+### Windows 
 
 ```
 netstat -a -n | find "LIST"
