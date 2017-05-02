@@ -1,6 +1,12 @@
 # Collection of useful commands and techniques that have served me well.
 
-## Centos
+## Centos / RedHat
+
+### List all services showing whether they are enabled/disabled (restart on boot)
+
+```
+sudo systemctl list-unit-files
+```
 
 ### Assign Static IP on adapter called 'rename3'
 
