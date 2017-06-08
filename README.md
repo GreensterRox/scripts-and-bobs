@@ -45,6 +45,8 @@ nvm install v4.2.2
 ### Run single Jasmine test (alternatively install jasmine globally and ensure it is in your path)
 
 ```
+./node_module/.bin/jasmine path/to/my/spec/file.spec.js
+or
 ./node_modules/jasmine/bin/jasmine.js path/to/my/spec/file.spec.js 
 ```
 
