@@ -137,7 +137,7 @@ docker rm -f $(docker ps -qa)
 ### Delete all unused images
 
 ```
-docker images --no-trunc | grep none | awk '{print $3}' | xargs -r docker rmi
+docker images --no-trunc | grep none | awk '{print $3}' | xargs docker rmi
 ```
 
 ### Delete all images
