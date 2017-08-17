@@ -20,6 +20,11 @@ ifconfig rename3 192.168.56.10 netmask 255.255.255.0 up
 yum list myRPM
 ```
 
+### Find largest 10 files on box
+```
+find / -type f -exec du -Sh {} + | sort -rh | head -n 10
+```
+
 ## NodeJS
 
 ## Clone an object without referencing it
