@@ -69,6 +69,27 @@ ansible-playbook build-localhost-environment.yml --list-hosts
 ansible-playbook -i inventory/hosts -u greensterRox -b --ask-pass --ask-become-pass update-localhost-to-specific.yml --extra-vars "package=myRPM service=myService version=1.2.3-10"
 ```
 
+## Run ansible on a Mac
+
+### Make sure you have virtualenv and pip installed
+
+```
+sudo easy_install virtualenv
+sudo easy_install pip
+```
+
+### Use virtualenv to install ansible and run build
+
+```
+cd /path/to/deploy/repo
+git fetch
+git pull
+cd playbooks
+virtualenv env
+source env/bin/activate
+pip install ansible
+ansible-playbook -i inventory/hosts -u ${USER} -b --ask-become-pass --ask-vault-pass ${BUILD-TARGET}.yml
+```
 
 ## Oracle
 
