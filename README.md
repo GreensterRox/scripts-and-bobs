@@ -116,8 +116,16 @@ SELECT * FROM MY_TABLE WHERE MY_TIMESTAMP_FIELD > TO_DATE('19/03/2015','dd/mm/yy
 
 ### Linux
 
+#### Open ports 
+
 ```
 netstat -plnt
+```
+
+#### Show which pid has the port
+
+```
+lsof -n -i :80 | grep LISTEN
 ```
 
 ### Windows 
