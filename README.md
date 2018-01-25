@@ -483,3 +483,9 @@ git update-index --assume-unchanged config/app.js
 // and undo it again
 git update-index --no-assume-unchanged config/app.js
 ```
+
+### Create branch from old commit id:
+
+```
+git checkout -b my-old-branch f8acba0f12d778393bc124c8b9578d93ef7f48a4
+```
