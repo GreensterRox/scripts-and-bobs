@@ -469,6 +469,12 @@ git cherry-pick d0c638bd395
 git cherry-pick 86d5414deaf
 ```
 
+### Merge a range of commits (cherry-pick)
+
+```
+git cherry-pick d0c638bd395..86d5414deaf
+```
+
 ### Create changelog from commit id
 
 ```
