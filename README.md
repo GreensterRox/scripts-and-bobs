@@ -180,7 +180,7 @@ docker images --no-trunc | grep none | awk '{print $3}' | xargs docker rmi
 docker rmi $(docker images -q)
 ```
 
-### Go into non-running container (peek)
+### Go into running container (peek)
 
 ```
 docker exec -ti a4083c8dbd99 /bin/bash -l
@@ -319,7 +319,7 @@ select * from information_schema.columns where column_default like '%sequence_na
 sudo su - myuser -s /bin/bash
 ```
 
-### command not found nonsense ?? Try:
+### command not found nonsense when running bash or sudo'ing ?? Try:
 ```
 bash -l
 ```
