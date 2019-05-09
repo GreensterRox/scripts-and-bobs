@@ -282,6 +282,14 @@ clear; mvn -Dtest="com.greenster.integration.WF1495_GetNetworkingInformationV3In
 mvn docker:start -Ddocker.repo.db2=docker.repo.com/tickets-db -Ddocker.tag.db2=latest -Ddocker.image.db2=docker.repo.com/tickets-db:latest -Ddocker.container.name.db2=tickets-db -Ddocker.repo.tickets=docker.repo.com/tickets-rt -Ddocker.tag.tickets=latest -Ddocker.image.tickets=docker.repo.com/tickets-rt:latest -Ddocker.container.name.tickets=tickets-rt -Ddocker.host.tickets.port.insecure=10080 -Ddocker.container.tickets.port.insecure=80 -Ddocker.host.tickets.port.secure=10443 -Ddocker.container.tickets.port.secure=443 -Ddocker.host.tickets.port.ssh=10022 -Ddocker.container.tickets.port.ssh=22 -Ddocker.host.tickets.port.smtp=10025 -Ddocker.container.tickets.port.smtp=25 -Ddocker.host.db2.port=13306 -Ddocker.container.db2.port=3306
 ```
 
+### Get netstat in slimline ubuntu Docker container
+
+```
+RUN printf "deb http://archive.debian.org/debian/ jessie main\ndeb-src http://archive.debian.org/debian/ jessie main\ndeb http://security.debian.org jessie/updates main\ndeb-src http://security.debian.org jessie/updates main" > /etc/apt/sources.list
+RUN apt update -y
+RUN apt install -y net-tools
+```
+
 ## Supervisord
 
 ### RESTART: send hangup signal
