@@ -4,7 +4,7 @@
 >> This will need refreshing every now and then otherwise a playlist might refer to a song (details) that has been altered.
 >> sudo su -
 >> cd /home/adrian/projects/create_playlist/
->> mv /media/sf_Ubuntu_local/iTunes\ Music\ Library.xml ~/projects/create_playlist/
+>> mv /media/sf_Ubuntu_local/iTunes\ Music\ Library.xml /home/adrian/projects/create_playlist/
 >> cp /media/sf_Ubuntu_local/convert_playlist.php . ; php -f convert_playlist.php "100 (ex)"
 >> mv playlists/*ex* /media/sf_Ubuntu_local/created_playlists/
 
@@ -397,12 +397,20 @@ foreach ($playlist_xref as $playlist_persistent_id => $track_id_array){
 				if(isset($VOLUME_TRACKS[$track_id])){
 					switch($VOLUME_TRACKS[$track_id]){
 						case '255':
-							$volume_adjust	= '2';
+							$volume_adjust	= '3';
 							break;
 						default:
-							die('Unknown volume adjust mapping !! ['.$VOLUME_TRACKS[$track_id].']');
+							if($VOLUME_TRACKS[$track_id] > 200) {
+								$volume_adjust	= '2.5';
+							} else if($VOLUME_TRACKS[$track_id] > 150) {
+								$volume_adjust	= '2';
+							} else {
+								$volume_adjust	= '1.5';
+							}
+							
 					}
 				}
+				var_dump($volume_adjust);
 				
 				$image_path = getImage($file_part,$playlist_directory);
 				
@@ -452,7 +460,7 @@ function convert_with_volume($destination,$image_path,$truncate_time,$volume_adj
 		
 }
 
-function convert($destination,$image_path,$truncate_time){
+function convert($destination,$image_path,$truncate_time,$volume_adjust){
 	
 	$truncate_section = '';
 	if($truncate_time){
@@ -464,7 +472,7 @@ function convert($destination,$image_path,$truncate_time){
 		$volume_option = '-filter:a "volume='.$volume_adjust.'"';
 	}
 	
-	$docker_cmd = 'docker run -it -v '.str_replace(basename($destination),'',$destination).':/files sjourdan/ffmpeg -stats -i /files/'.basename($destination).' -i /files/'.basename($image_path).' -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (Front)" '.$volume_option.' '.$truncate_section.'/files/'.substr(basename($destination),0,-4).'_.mp3';
+	$docker_cmd = 'docker run -it -v '.str_replace(basename($destination),'',$destination).':/files sjourdan/ffmpeg -stats -i /files/'.basename(escapeshellcmd($destination)).' -i /files/'.basename($image_path).' -map 0:0 -map 1:0 -id3v2_version 3 -metadata:s:v title="Album cover" -metadata:s:v comment="Cover (Front)" '.$volume_option.' '.$truncate_section.'/files/'.substr(escapeshellcmd(basename($destination)),0,-4).'_.mp3';
 	
 	echo 'Converting: ['.$destination.']'."\n".$docker_cmd."\n";
 
@@ -683,7 +691,7 @@ function process_playlist($meta_sql){
 }
 
 function store_track($sql_arr){
-	global $TRACKS, $TRUNCATE_TRACKS;
+	global $TRACKS, $TRUNCATE_TRACKS, $VOLUME_TRACKS;
 
 	foreach($sql_arr as $value){
 		if(strpos($value,'track_id') !== false){
