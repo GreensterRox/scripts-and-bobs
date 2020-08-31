@@ -1,5 +1,13 @@
 # Collection of useful commands and techniques that have served me well.
 
+## OneDrive
+
+### How to Sync Any Folder to OneDrive in Windows 10 (creates a junction)
+
+```
+mklink /j "%UserProfile%\OneDrive\Folder Name" "Full path of source folder"
+```
+
 ## Centos / RedHat
 
 ### List all services showing whether they are enabled/disabled (restart on boot)
