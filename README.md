@@ -511,3 +511,14 @@ git update-index --no-assume-unchanged config/app.js
 ```
 git checkout -b my-old-branch f8acba0f12d778393bc124c8b9578d93ef7f48a4
 ```
+
+## Apache Web Server
+
+### Add HTTP Authentication to web site
+<Directory /var/www/my_site/secret_area/>
+        AuthType Basic
+        AuthName "Restricted Files"
+        AuthBasicProvider file
+        AuthUserFile /etc/apache2/passwd/passwords
+        Require user $valid_username
+</Directory>
