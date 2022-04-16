@@ -524,3 +524,15 @@ git checkout -b my-old-branch f8acba0f12d778393bc124c8b9578d93ef7f48a4
         Require user $valid_username
 </Directory>
 ```
+
+## SQL
+
+### Get everything after the last hyphen in a field. You can of course change hyphen to any character of your choice
+```SELECT SUBSTR({field},LENGTH(REVERSE(SUBSTR(REVERSE({field}),LOCATE("-",REVERSE({field})))))) from {table};```
+
+### Set Auto Increment manually
+
+```ALTER TABLE table_name AUTO_INCREMENT = 40000;```
+
+### WordPress stores the absolute path of the site URL and home URL in the database. Therefore, if you transfer your WordPress site from the localhost to your server, your site will not load online. This is because the absolute path URL is still pointing to your localhost. You will need to change the site URL and the home URL in order for the site to work.
+```UPDATE wp_options SET option_value = replace(option_value, 'http://purpleteardrop.dave.studio', 'http://purpleteardrop.devserver.com') WHERE option_name = 'home' OR option_name = 'siteurl';```
